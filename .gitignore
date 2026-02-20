@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -22,3 +23,40 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+=======
+### Maven ###
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### Maven Wrapper ###
+.mvn/wrapper/maven-wrapper.jar
+
+### Spring Boot ###
+HELP.md
+
+### Application Properties (contains DB password)
+src/main/resources/application.properties
+
+### IDE Files ###
+# STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+
+### Logs ###
+*.log
+>>>>>>> a4a129184d1ca17410ce8041e06505f928d72565
