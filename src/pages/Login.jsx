@@ -11,15 +11,52 @@ export default function Login() {
   const [password,setPassword] = useState("");
   const [role,setRole] = useState("user");
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  // const handleSubmit = e => {
+  //   e.preventDefault();
 
-    login(email,password,role);
+  //   login(email,password,role);
 
-    if(role === "admin") navigate("/admin");
-    else navigate("/");
-  };
+  //   if(role === "admin") navigate("/admin");
+  //   else navigate("/");
+  // };
 
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch("http://localhost:8080/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        role
+      })
+    });
+
+    const data = await response.text();
+
+    if (response.ok) {
+
+      // 🔥 SAVE USER LOGIN STATE
+      localStorage.setItem("user", JSON.stringify({
+        email,
+        role
+      }));
+
+      if (role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+    }
+
+  } catch (error) {
+    alert("Error connecting to backend");
+  }
+};
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
 
