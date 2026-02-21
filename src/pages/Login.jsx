@@ -38,9 +38,8 @@ export default function Login() {
 
     const data = await response.text();
 
-    if (response.ok) {
+    if (data === "Login Successful") {
 
-      // 🔥 SAVE USER LOGIN STATE
       localStorage.setItem("user", JSON.stringify({
         email,
         role
@@ -51,6 +50,9 @@ export default function Login() {
       } else {
         navigate("/");
       }
+
+    } else {
+      alert(data);  // 🔥 show error message from backend
     }
 
   } catch (error) {
