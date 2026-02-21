@@ -1,3 +1,18 @@
+// // // import { BrowserRouter, Routes, Route } from "react-router-dom";
+// // // import MainLayout from "./layout/MainLayout";
+// // // import Dashboard from "./pages/Dashboard";
+
+// // // export default function App() {
+// // //   return (
+// // //     <BrowserRouter>
+// // //       <Routes>
+// // //         <Route element={<MainLayout />}>
+// // //           <Route path="/" element={<Dashboard />} />
+// // //         </Route>
+// // //       </Routes>
+// // //     </BrowserRouter>
+// // //   );
+// // // }
 // // import { BrowserRouter, Routes, Route } from "react-router-dom";
 // // import MainLayout from "./layout/MainLayout";
 // // import Dashboard from "./pages/Dashboard";
@@ -6,25 +21,57 @@
 // //   return (
 // //     <BrowserRouter>
 // //       <Routes>
+
 // //         <Route element={<MainLayout />}>
 // //           <Route path="/" element={<Dashboard />} />
 // //         </Route>
+
 // //       </Routes>
 // //     </BrowserRouter>
 // //   );
 // // }
 // import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 // import MainLayout from "./layout/MainLayout";
 // import Dashboard from "./pages/Dashboard";
+// import Login from "./pages/Login";
+// import Signup from "./pages/Signup";
+// import AdminDashboard from "./pages/AdminDashboard";
+
+// import ProtectedRoute from "./routes/ProtectedRoute";
+// import RoleRoute from "./routes/RoleRoute";
 
 // export default function App() {
 //   return (
 //     <BrowserRouter>
 //       <Routes>
 
-//         <Route element={<MainLayout />}>
-//           <Route path="/" element={<Dashboard />} />
+//         {/* PUBLIC ROUTES */}
+//         <Route path="/login" element={<Login />} />
+//         <Route path="/signup" element={<Signup />} />
+//          <Route path="/dashboard" element={<Dashboard />} />
+
+//         {/* USER DASHBOARD */}
+//         <Route
+//           path="/"
+//           element={
+//             <ProtectedRoute>
+//               <MainLayout />
+//             </ProtectedRoute>
+//           }
+//         >
+//           <Route index element={<Dashboard />} />
 //         </Route>
+
+//         {/* ADMIN PANEL */}
+//         <Route
+//           path="/admin"
+//           element={
+//             <RoleRoute role="admin">
+//               <AdminDashboard />
+//             </RoleRoute>
+//           }
+//         />
 
 //       </Routes>
 //     </BrowserRouter>
@@ -50,7 +97,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        {/* USER DASHBOARD */}
+        {/* PROTECTED USER ROUTES */}
         <Route
           path="/"
           element={
@@ -62,7 +109,7 @@ export default function App() {
           <Route index element={<Dashboard />} />
         </Route>
 
-        {/* ADMIN PANEL */}
+        {/* ADMIN ROUTE */}
         <Route
           path="/admin"
           element={
