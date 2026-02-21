@@ -1,26 +1,3 @@
-// package com.hireon.hireon.service;
-
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Service;
-// import com.hireon.hireon.entity.User;
-// import com.hireon.hireon.repository.UserRepository;
-
-// import java.util.List;
-
-// @Service
-// public class UserService {
-
-//     @Autowired
-//     private UserRepository userRepository;
-
-//     public User register(User user) {
-//         return userRepository.save(user);
-//     }
-
-//     public List<User> getAllUsers() {
-//         return userRepository.findAll();
-//     }
-// }
 
 package com.hireon.hireon.service;
 
@@ -32,23 +9,40 @@ import com.hireon.hireon.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
 
+// 🔽 ADDED IMPORT
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
 
-    // ✅ Registration (Already existing)
+    // 🔽 ADDED FIELD
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    // ✅ Registration (with duplicate email check)
     public User register(User user) {
+
+        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+
+        if (existingUser.isPresent()) {
+            throw new RuntimeException("Account already exists");
+        }
+
+        // 🔽 ADDED LINE (encrypt password before save)
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         return userRepository.save(user);
     }
 
-    // ✅ Get All Users (Already existing)
+    // ✅ Get All Users
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    // ✅ Login Method (NEW - Add this below existing methods)
+    // ✅ Login Method
     public String login(String email, String password, String role) {
 
         Optional<User> optionalUser = userRepository.findByEmail(email);
@@ -59,7 +53,8 @@ public class UserService {
 
         User user = optionalUser.get();
 
-        if (!user.getPassword().equals(password)) {
+        // 🔽 CHANGED COMPARISON (use BCrypt match)
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             return "Invalid password";
         }
 
