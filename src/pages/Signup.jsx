@@ -8,15 +8,36 @@ export default function Signup() {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
 
-  const handleSignup = e => {
-    e.preventDefault();
+  const handleSignup = async (e) => {
+  e.preventDefault();
 
-    // fake signup logic
-    if(email && password){
-      alert("Account created successfully!");
-      navigate("/login");
-    }
-  };
+  try {
+    const response = await fetch("http://localhost:8080/api/users/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+        role: "USER"
+      }),
+    });
+
+   if (response.status === 409) {
+  alert("Account already exists!");
+} else if (response.ok) {
+  alert("Account created successfully!");
+  navigate("/login");
+} else {
+  alert("Signup failed!");
+}
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Backend not connected!");
+  }
+};
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
