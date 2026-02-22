@@ -133,23 +133,44 @@ export default function Login(){
     setForm({...form,[e.target.name]:e.target.value});
   };
 
-  const handleSubmit = (e)=>{
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const userData = {
-      email: form.email,
-      role: form.role
-    };
+  try {
+    const response = await fetch("http://localhost:8080/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: form.email,
+        password: form.password
+      })
+    });
 
-    // fake login success
-    localStorage.setItem("user", JSON.stringify(userData));
+    const data = await response.text(); // because backend returns String
 
-    // update context
-    login(userData);
+    if (data === "Login Successful") {
 
-    // redirect
-    navigate(form.role === "admin" ? "/admin" : "/", { replace:true });
-  };
+      const userData = {
+        email: form.email,
+        role: form.role
+      };
+
+      localStorage.setItem("user", JSON.stringify(userData));
+      login(userData);
+
+      navigate(form.role === "admin" ? "/admin" : "/", { replace: true });
+
+    } else {
+      alert(data); // shows Invalid credentials / Account does not exist
+    }
+
+  } catch (error) {
+    console.error("Login error:", error);
+    alert("Server error");
+  }
+};
 
   return(
     <div className="flex min-h-screen bg-gray-100">
