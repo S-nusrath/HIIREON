@@ -58,9 +58,9 @@ public class UserService {
             return "Invalid password";
         }
 
-        if (!user.getRole().equalsIgnoreCase(role)) {
-            return "Invalid role";
-        }
+        // if (!user.getRole().equalsIgnoreCase(role)) {
+        //     return "Invalid role";
+        // }
 
         return "Login successful as " + user.getRole();
     }

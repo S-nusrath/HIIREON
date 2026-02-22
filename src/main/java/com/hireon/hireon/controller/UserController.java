@@ -32,23 +32,23 @@ public class UserController {
         }
     }
 
-    // ✅ LOGIN
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
+    // // ✅ LOGIN
+    // @PostMapping("/login")
+    // public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
 
-        String email = request.get("email");
-        String password = request.get("password");
-        String role = request.get("role");
+    //     String email = request.get("email");
+    //     String password = request.get("password");
+    //     String role = request.get("role");
 
-        String result = userService.login(email, password, role);
+    //     String result = userService.login(email, password, role);
 
-        if (result.startsWith("Login successful")) {
-            return ResponseEntity.ok(Map.of("message", result));
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("message", result));
-        }
-    }
+    //     if (result.startsWith("Login successful")) {
+    //         return ResponseEntity.ok(Map.of("message", result));
+    //     } else {
+    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+    //                 .body(Map.of("message", result));
+    //     }
+    // }
 
     // ✅ GET ALL USERS
     @GetMapping("/all")
