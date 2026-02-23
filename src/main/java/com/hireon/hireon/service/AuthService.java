@@ -1,29 +1,18 @@
-// public String login(LoginRequest request) {
 
-//     Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
 
-//     if (userOptional.isEmpty()) {
-//         return "Account does not exist";
-//     }
 
-//     User user = userOptional.get();
-
-//     if (!user.getPassword().equals(request.getPassword())) {
-//         return "Invalid credentials";
-//     }
-
-//     return "Login Successful";
-// }
 
 package com.hireon.hireon.service;
 
 import com.hireon.hireon.dto.LoginRequest;
 import com.hireon.hireon.entity.User;
 import com.hireon.hireon.repository.UserRepository;
+import com.hireon.hireon.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -35,25 +24,119 @@ public class AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-   public String login(LoginRequest request) {
+    @Autowired
+    private JwtUtil jwtUtil;
 
-    Optional<User> userOptional =
-            userRepository.findByEmail(request.getEmail());
+    public Map<String, String> login(LoginRequest request) {
 
-    if (userOptional.isEmpty()) {
-        return "Account does not exist";
+        Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
+
+        if (userOptional.isEmpty()) {
+            throw new RuntimeException("Account does not exist");
+        }
+
+        User user = userOptional.get();
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid credentials");
+        }
+
+        // ✅ Generate JWT token (same as before)
+        String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
+
+        // ✅ Return token + role + email
+        return Map.of(
+                "token", token,
+                "email", user.getEmail(),
+                "role", user.getRole()
+        );
     }
-
-    User user = userOptional.get();
-
-    // IMPORTANT PART
-    if (!passwordEncoder.matches(
-            request.getPassword(),
-            user.getPassword())) {
-
-        return "Invalid credentials";
-    }
-
-    return "Login Successful";
 }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // public String login(LoginRequest request) {
+
+// //     Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
+
+// //     if (userOptional.isEmpty()) {
+// //         return "Account does not exist";
+// //     }
+
+// //     User user = userOptional.get();
+
+// //     if (!user.getPassword().equals(request.getPassword())) {
+// //         return "Invalid credentials";
+// //     }
+
+// //     return "Login Successful";
+// // }
+
+// package com.hireon.hireon.service;
+
+// import com.hireon.hireon.dto.LoginRequest;
+// import com.hireon.hireon.entity.User;
+// import com.hireon.hireon.repository.UserRepository;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.stereotype.Service;
+
+// import java.util.Optional;
+
+// @Service
+// public class AuthService {
+
+//     @Autowired
+//     private UserRepository userRepository;
+
+//     @Autowired
+//     private PasswordEncoder passwordEncoder;
+
+//    public String login(LoginRequest request) {
+
+//     Optional<User> userOptional =
+//             userRepository.findByEmail(request.getEmail());
+
+//     if (userOptional.isEmpty()) {
+//         return "Account does not exist";
+//     }
+
+//     User user = userOptional.get();
+
+//     // IMPORTANT PART
+//     if (!passwordEncoder.matches(
+//             request.getPassword(),
+//             user.getPassword())) {
+
+//         return "Invalid credentials";
+//     }
+
+//     return "Login Successful";
+// }
+// }
+
+
+
+
