@@ -61,6 +61,12 @@ export default function MainLayout() {
           <Link to="/" className="block hover:text-indigo-400">
             Dashboard
           </Link>
+          <Link to="/jobs" className="block hover:text-indigo-400">
+            Jobs
+          </Link>
+          <Link to="/profile" className="block hover:text-indigo-400">
+            Profile
+          </Link>
         </nav>
       </aside>
 
@@ -90,6 +96,13 @@ export default function MainLayout() {
               >
                 Get Started
               </Link>
+              <Link
+                to="/Profile"
+                className="px-4 py-2 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+              >
+                Profile
+              </Link>
+
 
             </div>
           ) : (
