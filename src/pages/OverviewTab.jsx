@@ -1,66 +1,4 @@
-// import SkillChart from "../../components/dashboard/SkillChart";
 
-
-// function Section({ title, children }) {
-//   return (
-//     <div className="bg-white rounded-xl shadow p-6">
-//       <h2 className="font-semibold mb-4">{title}</h2>
-//       {children}
-//     </div>
-//   );
-// }
-
-// function Info({ label, value }) {
-//   return (
-//     <p className="text-sm mb-2">
-//       <span className="text-gray-500">{label}:</span> {value}
-//     </p>
-//   );
-// }
-
-// export default function OverviewTab({ user }) {
-//   return (
-//     <div className="grid md:grid-cols-2 gap-6">
-
-//       {user.role === "User" && (
-//         <>
-//           <Section title="Career Info">
-//             <Info label="Preferred Role" value={user.preferredRole} />
-//             <Info label="Skills" value={user.skills.join(", ")} />
-//             <Info label="LinkedIn" value={user.linkedin} />
-//           </Section>
-
-//           <Section title="Progress">
-//             <Info label="Questions" value={user.progress.questions} />
-//             <Info label="Mock Interviews" value={user.progress.interviews} />
-//             <Info label="Profile Strength" value={user.progress.strength + "%"} />
-//           </Section>
-
-//           <Section title="Skill Analytics">
-//             <SkillChart skills={user.skills} />
-//           </Section>
-//         </>
-//       )}
-
-//       {user.role === "Recruiter" && (
-//         <>
-//           <Section title="Company Info">
-//             <Info label="Company" value={user.company} />
-//             <Info label="Industry" value={user.industry} />
-//             <Info label="Website" value={user.website} />
-//           </Section>
-
-//           <Section title="Hiring Stats">
-//             <Info label="Jobs Posted" value={user.jobs.posted} />
-//             <Info label="Applicants" value={user.jobs.applicants} />
-//             <Info label="Interviews" value={user.jobs.interviews} />
-//           </Section>
-//         </>
-//       )}
-
-//     </div>
-//   );
-// }
 import SkillChart from "../components/dashboard/SkillChart";
 import { motion } from "framer-motion";
 
@@ -177,3 +115,86 @@ export default function OverviewTab({ user }) {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import SkillChart from "../../components/dashboard/SkillChart";
+
+
+// function Section({ title, children }) {
+//   return (
+//     <div className="bg-white rounded-xl shadow p-6">
+//       <h2 className="font-semibold mb-4">{title}</h2>
+//       {children}
+//     </div>
+//   );
+// }
+
+// function Info({ label, value }) {
+//   return (
+//     <p className="text-sm mb-2">
+//       <span className="text-gray-500">{label}:</span> {value}
+//     </p>
+//   );
+// }
+
+// export default function OverviewTab({ user }) {
+//   return (
+//     <div className="grid md:grid-cols-2 gap-6">
+
+//       {user.role === "User" && (
+//         <>
+//           <Section title="Career Info">
+//             <Info label="Preferred Role" value={user.preferredRole} />
+//             <Info label="Skills" value={user.skills.join(", ")} />
+//             <Info label="LinkedIn" value={user.linkedin} />
+//           </Section>
+
+//           <Section title="Progress">
+//             <Info label="Questions" value={user.progress.questions} />
+//             <Info label="Mock Interviews" value={user.progress.interviews} />
+//             <Info label="Profile Strength" value={user.progress.strength + "%"} />
+//           </Section>
+
+//           <Section title="Skill Analytics">
+//             <SkillChart skills={user.skills} />
+//           </Section>
+//         </>
+//       )}
+
+//       {user.role === "Recruiter" && (
+//         <>
+//           <Section title="Company Info">
+//             <Info label="Company" value={user.company} />
+//             <Info label="Industry" value={user.industry} />
+//             <Info label="Website" value={user.website} />
+//           </Section>
+
+//           <Section title="Hiring Stats">
+//             <Info label="Jobs Posted" value={user.jobs.posted} />
+//             <Info label="Applicants" value={user.jobs.applicants} />
+//             <Info label="Interviews" value={user.jobs.interviews} />
+//           </Section>
+//         </>
+//       )}
+
+//     </div>
+//   );
+// }

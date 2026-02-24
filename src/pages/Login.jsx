@@ -1,178 +1,66 @@
-// import { useState } from "react";
-// import { useAuth } from "../context/AuthContext";
-// import { useNavigate } from "react-router-dom";
 
-// export default function Login() {
 
-//   const { login } = useAuth();
-//   const navigate = useNavigate();
-
-//   const [email,setEmail] = useState("");
-//   const [password,setPassword] = useState("");
-//   const [role,setRole] = useState("user");
-//   const [loading,setLoading] = useState(false);
-//   const handleSubmit = (e) => {
-//   e.preventDefault();
-
-//   const userData = { email, role };
-
-//   // fake login success
-//   localStorage.setItem("user", JSON.stringify(userData));
-
-//   // update auth context
-//   login(userData);
-
-//   // redirect to dashboard
-//   navigate(role === "admin" ? "/admin" : "/", { replace:true });
-// };
-
-//   // const handleSubmit = async (e) => {
-//   //   e.preventDefault();
-//   //   setLoading(true);
-
-//   //   try {
-//   //     const response = await fetch("http://localhost:8080/api/auth/login", {
-//   //       method: "POST",
-//   //       headers: {
-//   //         "Content-Type": "application/json"
-//   //       },
-//   //       body: JSON.stringify({
-//   //         email,
-//   //         password,
-//   //         role
-//   //       })
-//   //     });
-
-//   //     const data = await response.text();
-
-//   //     if (data === "Login Successful") {
-
-//   //       const userData = { email, role };
-
-//   //       // save locally
-//   //       localStorage.setItem("user", JSON.stringify(userData));
-
-//   //       // update auth context (IMPORTANT)
-//   //       login(userData);
-
-//   //       // redirect
-//   //       navigate(role === "admin" ? "/admin" : "/", { replace:true });
-
-//   //     } else {
-//   //       alert(data);
-//   //     }
-
-//   //   } catch (error) {
-//   //     alert("Backend not connected");
-//   //   }
-
-//   //   setLoading(false);
-//   // };
-
-//   return (
-//     <div className="flex justify-center items-center h-screen bg-gray-100">
-
-//       <form onSubmit={handleSubmit} className="bg-white p-8 shadow rounded w-80">
-
-//         <h2 className="text-xl font-bold mb-5 text-center">
-//           Sign In
-//         </h2>
-
-//         <input
-//           type="email"
-//           placeholder="Email"
-//           className="w-full border p-2 mb-3"
-//           onChange={e=>setEmail(e.target.value)}
-//           required
-//         />
-
-//         <input
-//           type="password"
-//           placeholder="Password"
-//           className="w-full border p-2 mb-3"
-//           onChange={e=>setPassword(e.target.value)}
-//           required
-//         />
-
-//         <select
-//           className="w-full border p-2 mb-4"
-//           onChange={e=>setRole(e.target.value)}
-//         >
-//           <option value="user">User</option>
-//           <option value="admin">Admin</option>
-//         </select>
-
-//         <button
-//           disabled={loading}
-//           className="w-full bg-indigo-600 text-white py-2 rounded disabled:opacity-50"
-//         >
-//           {loading ? "Logging in..." : "Login"}
-//         </button>
-
-//       </form>
-
-//     </div>
-//   );
-// }
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-export default function Login(){
+export default function Login() {
 
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const [form,setForm] = useState({
-    email:"",
-    password:"",
-    role:"user"
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    role: "user" // UI only (not trusted)
   });
 
-  const handleChange = e =>{
-    setForm({...form,[e.target.name]:e.target.value});
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const response = await fetch("http://localhost:8080/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email: form.email,
-        password: form.password
-      })
-    });
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: form.email,
+          password: form.password,
+        }),
+      });
 
-    const data = await response.text(); // because backend returns String
+      const data = await response.json();
 
-    if (data === "Login Successful") {
+      if (response.ok) {
+        // ✅ Store JWT token
+        localStorage.setItem("token", data.token);
 
-      const userData = {
-        email: form.email,
-        role: form.role
-      };
+        // ✅ Trust backend role, not dropdown
+        const userData = {
+          email: data.email,
+          role: data.role,     // <-- backend role
+        };
 
-      localStorage.setItem("user", JSON.stringify(userData));
-      login(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
+        login(userData);
 
-      navigate(form.role === "admin" ? "/admin" : "/", { replace: true });
-
-    } else {
-      alert(data); // shows Invalid credentials / Account does not exist
+        // ✅ Navigate based on backend role
+        navigate(data.role === "ADMIN" ? "/admin" : "/", { replace: true });
+      } else {
+        alert(data.message || "Login failed");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Server error");
     }
+  };
 
-  } catch (error) {
-    console.error("Login error:", error);
-    alert("Server error");
-  }
-};
-
-  return(
+  return (
     <div className="flex min-h-screen bg-gray-100">
 
       {/* LEFT PANEL */}
@@ -214,11 +102,12 @@ export default function Login(){
             required
           />
 
-          {/* Role */}
+          {/* Role (UI only, not trusted) */}
           <select
             name="role"
             className="w-full border p-3 rounded-lg mb-6 focus:ring-2 focus:ring-indigo-500 outline-none"
             onChange={handleChange}
+            value={form.role}
           >
             <option value="user">User</option>
             <option value="admin">Admin</option>
@@ -233,7 +122,7 @@ export default function Login(){
           <p className="text-sm text-center mt-5 text-gray-500">
             Don’t have an account?{" "}
             <span
-              onClick={()=>navigate("/signup")}
+              onClick={() => navigate("/signup")}
               className="text-indigo-600 font-semibold cursor-pointer"
             >
               Signup
@@ -245,3 +134,22 @@ export default function Login(){
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

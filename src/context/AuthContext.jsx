@@ -1,78 +1,16 @@
-// // // import { createContext, useContext, useState } from "react";
 
-// // // const AuthContext = createContext();
-
-// // // export function AuthProvider({ children }) {
-// // //   const [user, setUser] = useState(null);
-
-// // //   const login = (email, password, role) => {
-// // //     if (email && password && role) {
-// // //       setUser({ email, role });
-// // //     }
-// // //   };
-
-// // //   const logout = () => setUser(null);
-
-// // //   return (
-// // //     <AuthContext.Provider value={{ user, login, logout }}>
-// // //       {children}
-// // //     </AuthContext.Provider>
-// // //   );
-// // // }
-
-// // // export const useAuth = () => useContext(AuthContext);
-
-// // import { createContext, useContext, useState, useEffect } from "react";
-
-// // const AuthContext = createContext();
-
-// // export function AuthProvider({ children }) {
-
-// //   const [user, setUser] = useState(null);
-
-// //   // restore login on refresh
-// //   useEffect(()=>{
-// //     const stored = localStorage.getItem("user");
-// //     if(stored){
-// //       setUser(JSON.parse(stored));
-// //     }
-// //   },[]);
-
-// //   const login = (userData)=>{
-// //     setUser(userData);
-// //   };
-
-// //   const logout = ()=>{
-// //     localStorage.removeItem("user");
-// //     setUser(null);
-// //   };
-
-// //   return (
-// //     <AuthContext.Provider value={{ user, login, logout }}>
-// //       {children}
-// //     </AuthContext.Provider>
-// //   );
-// // }
-
-// // export const useAuth = ()=> useContext(AuthContext);
-// import { createContext, useContext, useState, useEffect } from "react";
+// import { createContext, useContext, useState } from "react";
 
 // const AuthContext = createContext();
 
 // export function AuthProvider({ children }) {
 
-//   const [user, setUser] = useState(null);
-
-//   // restore login on refresh
-//   useEffect(() => {
-//     const stored = localStorage.getItem("user");
-//     if (stored) {
-//       setUser(JSON.parse(stored));
-//     }
-//   }, []);
+//   const [user, setUser] = useState(
+//     JSON.parse(localStorage.getItem("user"))
+//   );
 
 //   const login = (userData) => {
-//     localStorage.setItem("user", JSON.stringify(userData));  
+//     localStorage.setItem("user", JSON.stringify(userData));
 //     setUser(userData);
 //   };
 
@@ -89,23 +27,43 @@
 // }
 
 // export const useAuth = () => useContext(AuthContext);
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { createContext, useContext, useState } from "react";
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user"))
-  );
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("user"));
+    } catch {
+      return null;
+    }
+  });
 
   const login = (userData) => {
     localStorage.setItem("user", JSON.stringify(userData));
+    if (userData?.token) {
+      localStorage.setItem("token", userData.token); // optional if you use JWT
+    }
     setUser(userData);
   };
 
   const logout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("token"); // optional
     setUser(null);
   };
 
