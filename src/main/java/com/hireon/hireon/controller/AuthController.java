@@ -1,11 +1,8 @@
-
-
 package com.hireon.hireon.controller;
 
 import com.hireon.hireon.dto.LoginRequest;
 import com.hireon.hireon.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,25 +10,20 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 
     @Autowired
     private AuthService authService;
-@PostMapping("/login")
-public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 
-    try {
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+
         Map<String, String> result = authService.login(request);
-        return ResponseEntity.ok(result);
 
-    } catch (RuntimeException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(Map.of("message", e.getMessage()));
+        return ResponseEntity.ok(result);
     }
 }
-}
-
-
 
 
 
