@@ -19,26 +19,47 @@
 // }
 
 
+// import { Navigate } from "react-router-dom";
+
+// export default function RoleRoute({ children, role }) {
+//   const userRole = localStorage.getItem("role");
+
+//   if (!userRole) {
+//     return <Navigate to="/login" replace />;
+//   }
+
+//   if (userRole !== role) {
+//     return <Navigate to="/unauthorized" replace />;
+//   }
+
+//   return children;
+// }
+
+
+
+
+
+
+
+
+
+
+
 import { Navigate } from "react-router-dom";
 
 export default function RoleRoute({ children, role }) {
-  const userRole = localStorage.getItem("role");
+  const user = JSON.parse(localStorage.getItem("user"));  // 👈 FIX
 
-  if (!userRole) {
+  if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  if (userRole !== role) {
+  if (user.role?.toUpperCase() !== role?.toUpperCase()) { // 👈 FIX (case-safe)
     return <Navigate to="/unauthorized" replace />;
   }
 
   return children;
 }
-
-
-
-
-
 
 
 
