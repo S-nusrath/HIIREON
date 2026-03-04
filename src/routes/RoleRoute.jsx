@@ -45,25 +45,63 @@
 
 
 
+// import { Navigate } from "react-router-dom";
+
+// export default function RoleRoute({ children, role }) {
+//   const user = JSON.parse(localStorage.getItem("user"));  // 👈 FIX
+
+//   if (!user) {
+//     return <Navigate to="/login" replace />;
+//   }
+
+//   if (user.role?.toUpperCase() !== role?.toUpperCase()) { // 👈 FIX (case-safe)
+//     return <Navigate to="/unauthorized" replace />;
+//   }
+
+//   return children;
+// }
+
+// import { Navigate } from "react-router-dom";
+
+// export default function RoleRoute({ role, children }) {
+
+//   const user = JSON.parse(localStorage.getItem("user"));
+
+//   if (!user || user.role !== role) {
+//     return <Navigate to="/unauthorized" />;
+//   }
+
+//   return children;
+// }
+// import { Navigate } from "react-router-dom";
+
+// export default function RoleRoute({ role, children }) {
+
+//   const user = JSON.parse(localStorage.getItem("user"));
+
+//   if (!user || user.role?.toUpperCase() !== role.toUpperCase()) {
+//     return <Navigate to="/unauthorized" />;
+//   }
+
+//   return children;
+// }
+
 import { Navigate } from "react-router-dom";
 
-export default function RoleRoute({ children, role }) {
-  const user = JSON.parse(localStorage.getItem("user"));  // 👈 FIX
+export default function RoleRoute({ role, children }) {
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" />;
   }
 
-  if (user.role?.toUpperCase() !== role?.toUpperCase()) { // 👈 FIX (case-safe)
-    return <Navigate to="/unauthorized" replace />;
+  if (user.role !== role) {
+    return <Navigate to="/" />;
   }
 
   return children;
 }
-
-
-
-
 
 
 
