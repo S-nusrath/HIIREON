@@ -5,6 +5,8 @@ import com.hireon.hireon.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/jobs")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -16,5 +18,10 @@ public class JobController {
     @PostMapping
     public Job createJob(@RequestBody Job job) {
         return jobService.createJob(job);
+    }
+
+    @GetMapping
+    public List<Job> getAllJobs() {
+        return jobService.getAllJobs();
     }
 }
