@@ -27,9 +27,9 @@ public class SecurityConfig {
                 .cors(cors -> {})   // enable CORS
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**", "/api/users/register").permitAll()
-                        .anyRequest().authenticated()
-                )
+        .requestMatchers("/api/auth/**", "/api/users/register", "/api/jobs/**").permitAll()
+        .anyRequest().authenticated()
+)
                 // 🔥 JWT Filter added here
                 .addFilterBefore(jwtFilter,
                         org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class
