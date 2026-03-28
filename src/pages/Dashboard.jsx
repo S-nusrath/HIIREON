@@ -122,3 +122,61 @@ export default function Dashboard() {
     </div>
   );
 }
+
+// import { useEffect, useState } from "react";
+// import { getJobs } from "../api/jobApi";
+// import { applyJob } from "../api/applicationApi";
+
+// export default function Dashboard() {
+
+//   const [jobs, setJobs] = useState([]);
+
+//   useEffect(() => {
+//     fetchJobs();
+//   }, []);
+
+//   const fetchJobs = async () => {
+//     const data = await getJobs();
+//     setJobs(data);
+//   };
+
+//   // ✅ APPLY FUNCTION
+//   const handleApply = async (jobId) => {
+//     try {
+//       const userId = 1; // ⚠️ temporary (we fix later)
+
+//       await applyJob(userId, jobId);
+
+//       alert("Applied Successfully ✅");
+//     } catch (error) {
+//       console.error(error);
+//       alert("Failed to apply ❌");
+//     }
+//   };
+
+//   return (
+//     <div className="p-6">
+
+//       <h1 className="text-2xl font-bold mb-6">Available Jobs</h1>
+
+//       {jobs.map((job) => (
+//         <div key={job.id} className="border p-4 mb-4 rounded">
+
+//           <h2 className="text-lg font-semibold">{job.title}</h2>
+//           <p>{job.company}</p>
+//           <p>{job.location}</p>
+
+//           {/* ✅ APPLY BUTTON */}
+//           <button
+//             onClick={() => handleApply(job.id)}
+//             className="mt-3 bg-blue-500 text-white px-4 py-2 rounded"
+//           >
+//             Apply
+//           </button>
+
+//         </div>
+//       ))}
+
+//     </div>
+//   );
+// }
