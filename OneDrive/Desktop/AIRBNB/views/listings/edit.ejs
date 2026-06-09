@@ -1,0 +1,276 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust</title>
+</head>
+<body>
+     <h3>Create a new Listing</h3>
+   <form>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea><br><br>
+        <label for="image">Image URL:</label>
+        <input type="text" id="image" name="image" required><br><br>
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required><br><br>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required><br><br>
+
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required><br><br>
+
+        <button type="submit">Create Listing</button>
+            </form>
+    </body>
+</html> -->
+<!-- <% layout("/layouts/boilerplate") %>
+
+<h3>Edit Listing</h3>
+
+<form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+
+    <label for="title">Title:</label>
+
+    <input 
+        type="text" 
+        id="title" 
+        name="title"
+        value="<%= listing.title %>"
+        required
+    >
+
+    <br><br>
+
+    <label for="description">Description:</label>
+
+    <textarea 
+        id="description" 
+        name="description"
+        required
+    ><%= listing.description %></textarea>
+
+    <br><br>
+
+    <label for="image">Image URL:</label>
+
+    <input 
+        type="text" 
+        id="image" 
+        name="image"
+        value="<%= listing.image.url || listing.image %>"
+        required
+    >
+
+    <br><br>
+
+    <label for="price">Price:</label>
+
+    <input 
+        type="number" 
+        id="price" 
+        name="price"
+        value="<%= listing.price %>"
+        required
+    >
+
+    <br><br>
+
+    <label for="location">Location:</label>
+
+    <input 
+        type="text" 
+        id="location" 
+        name="location"
+        value="<%= listing.location %>"
+        required
+    >
+
+    <br><br>
+
+    <label for="country">Country:</label>
+
+    <input 
+        type="text" 
+        id="country" 
+        name="country"
+        value="<%= listing.country %>"
+        required
+    >
+
+    <br><br>
+
+    <button type="submit">
+        Update Listing
+    </button>
+
+</form> -->
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="card shadow-lg border-0 rounded-4 p-4">
+
+                <h2 class="text-center mb-4">
+                    Edit Listing
+                </h2>
+
+                <form 
+                    method="POST" 
+                    action="/listings/<%= listing._id %>?_method=PUT"
+                >
+
+                    <!-- TITLE -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="title">
+                            Title
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="title"
+                            name="title"
+                            value="<%= listing.title %>"
+                            required
+                        >
+
+                    </div>
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="description">
+                            Description
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            id="description"
+                            name="description"
+                            rows="4"
+                            required
+                        ><%= listing.description %></textarea>
+
+                    </div>
+
+                    <!-- IMAGE -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="image">
+                            Image URL
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="image"
+                            name="image"
+                            value="<%= listing.image.url || listing.image %>"
+                            required
+                        >
+
+                    </div>
+
+                    <!-- IMAGE PREVIEW -->
+
+                    <div class="mb-4 text-center">
+
+                        <img
+                            src="<%= listing.image.url || listing.image %>"
+                            class="img-fluid rounded shadow"
+                            style="height: 300px; object-fit: cover;"
+                        >
+
+                    </div>
+
+                    <!-- PRICE -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="price">
+                            Price
+                        </label>
+
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="price"
+                            name="price"
+                            value="<%= listing.price %>"
+                            required
+                        >
+
+                    </div>
+
+                    <!-- LOCATION -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="location">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="location"
+                            name="location"
+                            value="<%= listing.location %>"
+                            required
+                        >
+
+                    </div>
+
+                    <!-- COUNTRY -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label" for="country">
+                            Country
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="country"
+                            name="country"
+                            value="<%= listing.country %>"
+                            required
+                        >
+
+                    </div>
+
+                    <!-- BUTTON -->
+
+                    <div class="text-center">
+
+                        <button class="btn btn-dark btn-lg px-4">
+
+                            Update Listing
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

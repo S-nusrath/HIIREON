@@ -1,0 +1,80 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust</title>
+</head>
+<body>
+    <h2>All Listings</h2>
+    <ul>
+ <%   for(let listing of allListings){%>
+    <div>
+        <h3><%= listing.title %></h3>
+    </div>
+<% } %>
+</ul>
+</body>
+</html> -->
+ <!-- <% layout("/layouts/boilerplate") %>
+<body>
+
+    <h2>All Listings</h2>
+    <form method="get" action="/listings/new">
+        <button type="submit">Create new listing</button>
+    </form>
+    <ul>
+
+        <% for(let listing of allListings){ %>
+
+          <li>
+    <a href="/listings/<%= listing._id %>">
+        <h3><%= listing.title %></h3>
+    </a>
+</li>
+
+        <% } %>
+
+    </ul>
+</body> -->
+
+<% layout("/layouts/boilerplate") %>
+
+<h2>All Listings</h2>
+
+<div class="row">
+
+  <% for(let listing of allListings) { %>
+
+    <div class="card m-3" style="width: 18rem;">
+
+      <img 
+        src="<%= listing.image.url || listing.image %>" 
+        class="card-img-top" 
+        alt="listing_image"
+      >
+
+      <div class="card-body">
+
+        <h5 class="card-title">
+          <%= listing.title %>
+        </h5>
+
+        <p class="card-text">
+          ₹ <%= listing.price %>
+        </p>
+
+        <a 
+          href="/listings/<%= listing._id %>" 
+          class="btn btn-dark"
+        >
+          View Details
+        </a>
+
+      </div>
+
+    </div>
+
+  <% } %>
+
+</div>

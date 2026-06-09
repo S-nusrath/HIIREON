@@ -1,0 +1,129 @@
+<nav class="navbar navbar-expand-md bg-body-tertiary sticky-top">
+  <div class="container-fluid">
+
+    <!-- Logo -->
+    <a class="navbar-brand logo" href="/">
+      <i class="fa-solid fa-compass"></i>
+      <span>Luxora</span>
+    </a>
+
+    <!-- Mobile Toggle Button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Left Side Links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <!-- Home -->
+        <li class="nav-item">
+          <a class="nav-link active" href="/">
+            Home
+          </a>
+        </li>
+
+        <!-- Listings -->
+        <li class="nav-item">
+          <a class="nav-link" href="/listings">
+            All Listings
+          </a>
+        </li>
+
+        <!-- Account Dropdown -->
+        <li class="nav-item dropdown">
+
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Account
+          </a>
+
+          <ul class="dropdown-menu">
+
+            <% if(!currUser){ %>
+
+              <li>
+                <a class="dropdown-item" href="/signup">
+                  Signup
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="/login">
+                  Login
+                </a>
+              </li>
+
+            <% } else { %>
+
+              <li>
+                <a class="dropdown-item" href="/listings/new">
+                  Add New Listing
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="/logout">
+                  Logout
+                </a>
+              </li>
+
+            <% } %>
+
+          </ul>
+
+        </li>
+
+      </ul>
+
+      <!-- Welcome Username -->
+      <% if(currUser){ %>
+
+        <div class="me-3 fw-bold">
+
+          Welcome, <%= currUser.username %>
+
+        </div>
+
+      <% } %>
+
+      <!-- Search Bar -->
+      <form
+        class="d-flex"
+        role="search"
+        method="GET"
+        action="/listings/search"
+      >
+
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search Listings"
+          aria-label="Search"
+          name="q"
+        />
+
+        <button class="btn btn-outline-dark" type="submit">
+          Search
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,299 @@
+body{
+    background-color: aqua;
+}
+
+/* Google Font */
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar */
+.navbar{
+    height: 5rem;
+    background-color: white !important;
+}
+
+/* Logo Styling */
+.logo{
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #222 !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+/* Compass Icon */
+.logo i{
+    color: #ff385c;
+    font-size: 1.8rem;
+    transform: rotate(-15deg);
+}
+
+/* Hover Effect */
+.logo:hover{
+    transform: scale(1.03);
+}
+
+/* Text */
+.logo span{
+    letter-spacing: 1px;
+}
+/* FOOTER */
+
+.footer{
+    background-color: #111827;
+    color: #fff;
+    padding: 4rem 2rem 1rem;
+    margin-top: 4rem;
+}
+
+/* Container */
+
+.footer-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Logo */
+
+.footer-logo{
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+}
+
+.footer-logo i{
+    color: #ff385c;
+    margin-right: 8px;
+    transform: rotate(-15deg);
+}
+
+/* Paragraph */
+
+.footer-brand p{
+    margin-top: 1rem;
+    color: #d1d5db;
+    line-height: 1.7;
+}
+
+/* Headings */
+
+.footer-links h5,
+.footer-social h5{
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Links */
+
+.footer-links a{
+    display: block;
+    color: #d1d5db;
+    text-decoration: none;
+    margin-bottom: 0.8rem;
+    transition: 0.3s;
+}
+
+.footer-links a:hover{
+    color: #ff385c;
+    transform: translateX(5px);
+}
+
+/* Social Icons */
+
+.social-icons{
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons a{
+    width: 42px;
+    height: 42px;
+    background: #1f2937;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.social-icons a:hover{
+    background: #ff385c;
+    transform: translateY(-5px);
+}
+
+/* Bottom */
+
+.footer-bottom{
+    border-top: 1px solid #374151;
+    margin-top: 3rem;
+    padding-top: 1rem;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 0.95rem;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container{
+    min-height: 80vh;
+}
+.developer-tag{
+    margin-top: 1rem;
+    color: #9ca3af;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+/* BODY */
+
+body{
+    font-family: "Poppins", sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* NAVBAR */
+
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: #222222 !important;
+    font-size: 1.1rem;
+}
+
+/* CARD */
+
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+    border-radius: 1rem !important;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.card-img-top{
+    width: 100% !important;
+    height: 300px;
+    object-fit: cover !important;
+}
+
+.card-body{
+    padding: 1rem !important;
+}
+
+.card-text p{
+    font-weight: 400;
+}
+
+/* SHOW PAGE */
+
+.show-card{
+    width: 40rem;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+/* BUTTONS */
+
+.btn-dark{
+    background-color: #222222 !important;
+    border: none !important;
+}
+
+.btn-danger{
+    border-radius: 0.5rem;
+}
+
+/* LIST */
+
+ul{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li{
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* FOOTER */
+
+footer{
+    background-color: #222222;
+    color: white;
+    padding: 2rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+/* FORM */
+
+form label{
+    font-weight: 600;
+}
+
+.form-control{
+    border-radius: 0.8rem !important;
+    padding: 0.8rem;
+}
+
+textarea.form-control{
+    resize: none;
+}
+/* FORM DESIGN */
+
+form label{
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.form-control{
+    border-radius: 0.8rem !important;
+    padding: 0.8rem;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus{
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-color: #222222;
+}
+
+textarea.form-control{
+    resize: none;
+}
+
+.card{
+    border-radius: 1rem !important;
+}
+/* BOOKING PAGE */
+
+.booking-card img{
+    height: 350px;
+    object-fit: cover;
+}
+
+.form-control{
+    border-radius: 0.8rem !important;
+    padding: 0.8rem;
+}
+
+.btn-dark{
+    border-radius: 0.8rem;
+}
